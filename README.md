@@ -1,5 +1,17 @@
 # nota-fiscal-logger
 ## Instalação
+Criar um ambiente virtual e ativar
+Linux:
+``` bash
+python -m venv venv
+source venv/bin/activate
+```
+Windows
+``` powershell
+python -m venv venv
+venv\Scripts\activate.ps1
+```
+
 ``` bash
 pip install -r requirements.txt
 ```
