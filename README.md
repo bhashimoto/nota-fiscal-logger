@@ -8,11 +8,13 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-Windows
+Windows:
 ``` powershell
 python -m venv venv
 venv\Scripts\activate.ps1
 ```
+
+Instalar pacotes necessários:
 
 ``` bash
 pip install -r requirements.txt
