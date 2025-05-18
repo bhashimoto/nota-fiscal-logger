@@ -1,7 +1,5 @@
 # nota-fiscal-logger
-## Instalação
-
-### Linux
+## Instalação (linux)
 Criar um ambiente virtual e ativar
 ``` bash
 python3 -m venv venv
@@ -14,15 +12,9 @@ Instalar pacotes necessários:
 python3 -m pip install -r requirements.txt
 ```
 
-### Windows
-``` powershell
-python -m venv venv
-venv\Scripts\activate.ps1
-```
-
 ## Utilização
 Executar o script main.py
 ```bash
-python main.py
+python3 main.py
 ```
 Ler os QR codes das notas fiscais usando a câmera. Para finalizar a leitura, apertar a tecla 'q'.

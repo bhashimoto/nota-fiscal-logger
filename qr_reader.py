@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 class QRReader:
-    QUIT_KEY = 'q'
+    QUIT_KEYS = [ord('q'), 32] # 32 is space
 
     def __init__(self):
         self.cap:cv.VideoCapture = cv.VideoCapture(0)
@@ -18,7 +18,7 @@ class QRReader:
             raise Exception("Could not open video capture")
 
     def read(self):
-        while cv.waitKey(1) != ord(QRReader.QUIT_KEY):
+        while cv.waitKey(1) not in QRReader.QUIT_KEYS:
             ret, frame = self.cap.read()
 
             if not ret:
