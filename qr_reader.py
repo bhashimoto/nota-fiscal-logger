@@ -1,4 +1,3 @@
-import sys
 import logging
 import json
 import cv2 as cv
