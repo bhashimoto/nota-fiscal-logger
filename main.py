@@ -12,9 +12,10 @@ def main():
     for url in qrr.codes.keys():
         data = nff.fetch_nf(url)
 
-        dbm.insert_nf(data["header"])
+        nf_id = dbm.insert_nf(data["header"])
         
         for item in data["items"]:
+            item["nf"] = nf_id
             dbm.insert_item(item)
 
 

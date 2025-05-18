@@ -42,21 +42,25 @@ class DBManager:
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT,
                     value REAL,
-                    item_nf INTEGER,
-                    FOREIGN KEY(item_nf) REFERENCES nota_fiscal(id)
+                    nf INTEGER,
+                    FOREIGN KEY(nf) REFERENCES nota_fiscal(id)
                 );
             """)
 
-    def insert_nf(self, data:dict):
+    def insert_nf(self, data:dict) -> int|None:
         logger.info(f"Inserting Nota Fiscal: {data}")
         cur = self.connection.cursor()
-        cur.execute("""
-            INSERT INTO nota_fiscal (cnpj, number, series, issue_date) VALUES
-            (:cnpj, :number, :series, :issue_date);
-        """, data)
+        try:
+            cur.execute("""
+                INSERT INTO nota_fiscal (cnpj, number, series, issue_date) VALUES
+                (:cnpj, :number, :series, :issue_date);
+            """, data)
+        except sqlite3.IntegrityError:
+            logger.info(f"Nota fiscal já existe na base, ignorando")
+        return cur.lastrowid
 
     def insert_item(self, data:dict):
         logger.info(f"Inserting item: {data}")
         cur = self.connection.cursor()
-        cur.executemany("INSERT INTO items (name, value) VALUES (:name, :value)",(data,))
+        cur.executemany("INSERT INTO items (name, value, nf) VALUES (:name, :value, :nf)",(data,))
         self.connection.commit()
